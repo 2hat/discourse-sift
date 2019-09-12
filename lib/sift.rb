@@ -142,6 +142,12 @@ class Sift
               'subcategory' => "#{post.topic&.id}"
           }
 
+          if SiteSetting.sift_language_code.present?
+            payload['language'] = SiteSetting.sift_language_code
+          else
+            payload['language'] = "*"
+          end
+
           Rails.logger.debug("sift_debug: payload = #{payload}")
 
           unless extra_reason_remarks.blank?
