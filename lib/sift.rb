@@ -134,10 +134,10 @@ class Sift
 
     def submit_for_post_action(post, moderator, reason, extra_reason_remarks)
 
-      Rails.logger.debug('sift_debug: submit_for_post_action Enter')
+      #Rails.logger.debug('sift_debug: submit_for_post_action Enter')
 
-      Rails.logger.debug("sift_debug: submit_for_post_action: self='#{post.inspect}', reason='#{reason}'")
-      Rails.logger.debug("sift_debug: submit_for_post_action: extra_reason_remarks='#{extra_reason_remarks}'")
+      #Rails.logger.debug("sift_debug: submit_for_post_action: self='#{post.inspect}', reason='#{reason}'")
+      #Rails.logger.debug("sift_debug: submit_for_post_action: extra_reason_remarks='#{extra_reason_remarks}'")
 
       user_display_name = post.user.name.presence || post.user.username.presence
       moderator_display_name = moderator.name.presence || moderator.username.presence
@@ -158,7 +158,7 @@ class Sift
         payload['language'] = "*"
       end
 
-      Rails.logger.debug("sift_debug: payload = #{payload}")
+      #Rails.logger.debug("sift_debug: payload = #{payload}")
 
       unless extra_reason_remarks.blank?
         payload['reason_other_text'] = extra_reason_remarks

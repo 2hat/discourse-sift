@@ -36,8 +36,8 @@ end
 
 def trigger_post_report(post_action, action)
   # Use Job queue
-  Rails.logger.debug("sift_debug: trigger_post_report: enter")
-  Rails.logger.debug("sift_debug: trigger_post_report: action=#{action}, post_action=#{post_action.inspect}")
+  #Rails.logger.debug("sift_debug: trigger_post_report: enter")
+  #Rails.logger.debug("sift_debug: trigger_post_report: action=#{action}, post_action=#{post_action.inspect}")
   Jobs.enqueue(:report_post, post_action_id: post_action.id, action: action)
 end
 
@@ -130,7 +130,7 @@ after_initialize do
   #
   on(:flag_agreed) do |post_action, _params|
     begin
-      Rails.logger.debug("sift_debug: in on(:flag_agreed): action: #{post_action.inspect}, params: #{_params.inspect}")
+      #Rails.logger.debug("sift_debug: in on(:flag_agreed): action: #{post_action.inspect}, params: #{_params.inspect}")
 
       trigger_post_report(post_action, "agree")
     rescue Exception => e
@@ -141,7 +141,7 @@ after_initialize do
 
   on(:flag_disagreed) do |post_action, _params|
     begin
-      Rails.logger.debug("sift_debug: in on(:flag_disagreed): action: #{post_action.inspect}, params: #{_params.inspect}")
+      #Rails.logger.debug("sift_debug: in on(:flag_disagreed): action: #{post_action.inspect}, params: #{_params.inspect}")
 
       trigger_post_report(post_action, "disagree")
     rescue Exception => e
