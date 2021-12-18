@@ -37,6 +37,10 @@ plugins:
   sift_error_is_false_response:
     default: false
     shadowed_by_global: true
+  sift_prefix_category_request_parameter:
+    default: ''
+    shadowed_by_global: true
+    hidden: true
   sift_extra_request_parameter:
     default: ''
     shadowed_by_global: true

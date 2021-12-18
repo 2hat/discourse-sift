@@ -175,7 +175,6 @@ class Sift
       payload['sift_flagged'] = sift_flagged
       payload['user_flagged'] = user_flagged
 
-
       Rails.logger.debug("sift_debug: submit_for_post_action: payload = #{payload}")
 
       begin
@@ -184,7 +183,7 @@ class Sift
           #if there is an error reaching Community Sift, escalate to human moderation
 
           error_message = if response.nil?
-                            "sift_debug: Got an error from Sift: No response object"
+            "sift_debug: Got an error from Sift: No response object"
                           else
                             "sift_debug: Got an error from Sift: status: #{response.status} response: #{response.inspect}"
                           end
@@ -245,7 +244,7 @@ class Sift
       #Rails.logger.debug("sift_debug: to_classify = #{to_classify.inspect}")
 
       request_body = {
-        'category' => "#{to_classify.topic&.category&.id}",
+        'category' => "#{SiteSetting.sift_prefix_category_request_parameter}#{to_classify.topic&.category&.slug_path&.join('/')}",
         'subcategory' => "#{to_classify.topic&.id}",
         'user_id' => "#{to_classify.user.id}",
         'user_display_name' => "#{to_classify.user.username}",
@@ -299,7 +298,7 @@ class Sift
             user: 'discourse-plugin',
             password: @api_key
         )
-        return response
+        response
       rescue
         Rails.logger.error("sift_debug: post: Error in invoking the endpoint")
         raise
