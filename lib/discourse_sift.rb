@@ -8,6 +8,9 @@ module DiscourseSift
   def self.should_classify_post?(post)
     return false if post.blank? || (!SiteSetting.sift_enabled?)
 
+    # Don't classify if a post is orphaned
+    return false unless post.topic
+
     #Don't Classify Private Messages
     return false if post.topic.private_message?
 
