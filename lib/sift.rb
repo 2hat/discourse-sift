@@ -275,12 +275,7 @@ class Sift
 
       #Rails.logger.debug("sift_debug: post: payload = #{payload.inspect}")
 
-      # Account for a '/' or not at start of endpoint
-      if !endpoint.start_with? '/'
-        target = "/#{endpoint}"
-      end
-
-      request_url = "#{@api_url}#{endpoint}"
+      request_url = File.join(@api_url, endpoint)
 
       if !SiteSetting.sift_extra_request_parameter.blank?
         payload[DiscourseSift::REQUEST_EXTRA_PARAM_FIELD] = SiteSetting.sift_extra_request_parameter
