@@ -1,7 +1,7 @@
 import {
-  default as computed,
+  default as discourseComputed,
   on
-} from "ember-addons/ember-computed-decorators";
+} from "discourse-common/utils/decorators";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
 export default Ember.Controller.extend({
@@ -13,7 +13,7 @@ export default Ember.Controller.extend({
     this.setProperties({ reported_reason: null, other_reason: null });
   },
 
-  @computed("reported_reason", "other_reason")
+  @discourseComputed("reported_reason", "other_reason")
   attachDisabled(reported_reason, other_reason) {
     if (reported_reason === "other") {
       return !other_reason || other_reason.length === 0;
