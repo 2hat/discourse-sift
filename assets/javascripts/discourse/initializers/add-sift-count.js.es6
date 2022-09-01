@@ -22,7 +22,6 @@ function subscribeToReviewCount(messageBus, user) {
 
 export default {
   name: 'add-sift-count',
-  before: 'register-discourse-location',
   after: 'inject-objects',
 
   initialize(container) {
