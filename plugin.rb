@@ -148,9 +148,10 @@ after_initialize do
 
   if reviewable_api_enabled
     on(:reviewable_created) do |reviewable|
-      return unless reviewable.type === "ReviewableFlaggedPost"
-      reviewable.payload["sift"] = reviewable.post.custom_fields["sift"]
-      reviewable.save!
+      if reviewable.type == "ReviewableFlaggedPost"
+        reviewable.payload["sift"] = reviewable.post.custom_fields["sift"]
+        reviewable.save!
+      end
     end
 
     add_to_serializer(:reviewable_flagged_post, :sift_response) do
